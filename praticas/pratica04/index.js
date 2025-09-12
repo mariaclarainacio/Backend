@@ -20,14 +20,21 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const novaTarefa = {
-    id: tarefas.length + 1,
-    nome: req.body.nome,
-    concluida: req.body.concluida || false
-  };
-  tarefas.push(novaTarefa);
-  res.status(201).json(novaTarefa);
-});
+    const { nome, concluida } = req.body;
+  
+    if (!nome) {
+      return res.status(400).json({ erro: "O campo 'nome' é obrigatório" });
+    }
+  
+    const novaTarefa = {
+      id: tarefas.length + 1,
+      nome,
+      concluida: concluida || false
+    };
+  
+    tarefas.push(novaTarefa);
+    res.status(201).json(novaTarefa);
+  });
 
 router.get("/:tarefaId", (req, res, next) => {
   const tarefa = tarefas.find(t => t.id == req.params.tarefaId);
