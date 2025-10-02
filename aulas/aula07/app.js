@@ -29,7 +29,7 @@ app.post('/tarefas', (req,res) => {
     res.status(201).json(novaTarefa);
 });
 
-app.get("/tarefas/:id", (res,res) => {
+app.get("/tarefas/:id", (req,res) => {
     res.json({});
 });
 

@@ -1,4 +1,4 @@
-import {soma, subtracao, multiplicacao, divisao} from "./index.js"
+module.exports = { soma, subtracao, multiplicacao, divisao };
 
 console.log("Teste da função soma()");
 if (soma(2, 2) === 4) console.log("Passou o 1º!");
