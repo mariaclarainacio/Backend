@@ -10,7 +10,6 @@ const criarTarefa = (req, res) => {
   res.status(201).json(novaTarefa);
 };
 
-
 const pesquisarId = (req, res, next) => {
   const { id } = req.params;
   const tarefaEncontrada = model.pesquisarId(id);
@@ -27,20 +26,15 @@ const exibirTarefa = (req, res) => {
 
 const alterarTarefa = (req, res) => {
   const { id } = req.params;
-  const tarefaAlterada = model.alterar({ id, ...req.body });
-  if (tarefaAlterada) {
-    return res.json(tarefaAlterada);
-  }
-  res.status(404).json({ msg: "Tarefa não encontrada" });
+  const tarefaEncontrada = model.alterar({ id, ...req.body });
+  // ({id, req.body.nome, req.body.concluida })
+  return res.json(tarefaEncontrada);
 };
 
 const apagarTarefa = (req, res) => {
   const { id } = req.params;
-  const posicao = model.excluir(id);
-  if (posicao >= 0) {
-    return res.status(204).end();
-  }
-  res.status(404).json({ msg: "Tarefa não encontrada" });
+  model.excluir(id);
+  return res.status(204).end();
 };
 
 module.exports = {
